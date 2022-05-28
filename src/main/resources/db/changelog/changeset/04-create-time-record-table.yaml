@@ -1,46 +1,48 @@
 databaseChangeLog:
   - changeSet:
-      id: create-users
+      id: create-schedule
       author: tegorova
       changes:
         - createTable:
-            tableName: users
+            tableName: time_record
             columns:
               - column:
                   name: id
                   type: bigint
-                  autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
                     unique: true
               - column:
-                  name: fullname
+                  name: text
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_date
                   type: varchar(100)
                   constraints:
                     nullable: true
               - column:
-                  name: email
-                  type: varchar(50)
+                  name: end_date
+                  type: varchar(100)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
-                  name: username
+                  name: date
                   type: varchar(20)
                   constraints:
                     nullable: false
               - column:
-                  name: password
-                  type: varchar(120)
+                  name: hours_spent
+                  type: bigint
+                  constraints:
+                    nullable: true
+              - column:
+                  name: user_id
+                  type: bigint
                   constraints:
                     nullable: false
-              - column:
-                  name: phone
-                  type: varchar(11)
-                  constraints:
-                    nullable: true
-              - column:
-                  name: is_active
-                  type: boolean
-                  constraints:
-                    nullable: true
+                    referencedTableName: users
+                    referencedColumnNames: id
+                    foreignKeyName: fk_users_id
